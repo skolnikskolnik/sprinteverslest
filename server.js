@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
 
 //HTML ROUTES
 //Want to serve up different HTML pages when different buttons are hit
@@ -31,7 +31,7 @@ app.get("/stats", (req, res) => {
 
 
 //API ROUTES
-//A post route to /api/workouts that creates the workout for today but doesn't take in any other information yet
+//A post route to /api/workouts that starts a session
 app.post("/api/workouts", (req, res) => {
   let date = {
     day: Date.now()
@@ -47,7 +47,7 @@ app.post("/api/workouts", (req, res) => {
 
 });
 
-//A put route that adds the rest of the information to the post we just created
+//A put route that adds an exercise to the session started by the post route
 app.put("/api/workouts/:id", (req, res) => {
   let body = req.body;
   let id = req.params.id;

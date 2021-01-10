@@ -9,18 +9,6 @@ async function initWorkout() {
   dateEl.appendChild(dateTextNode);
   displayEl.appendChild(dateEl);
 
-  //Displays type of workout
-  let typeEl = document.createElement("p");
-  let typeTextNode = document.createTextNode(`Type: ${lastWorkout.type}`);
-  typeEl.appendChild(typeTextNode);
-  displayEl.appendChild(typeEl);
-
-  //Display name of workout
-  let nameEl = document.createElement("p");
-  let nameTextNode = document.createTextNode(`Name: ${lastWorkout.name}`);
-  nameEl.appendChild(nameTextNode);
-  displayEl.appendChild(nameEl);
-
   
 
   if (lastWorkout) {
