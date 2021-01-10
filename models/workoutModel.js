@@ -6,25 +6,8 @@ const WorkoutSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    type: {
-        type: String,
-        trim: true
-    },
-    name: {
-        type: String,
-        trime: true
-    },
-    duration: {
-        type: Number
-    },
-    weight: {
-        type: Number 
-    },
-    reps: {
-        type: Number
-    },
-    sets: {
-        type: Number
+    exercises: {
+        type: Array
     }
 });
 

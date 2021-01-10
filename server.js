@@ -52,13 +52,13 @@ app.put("/api/workouts/:id", (req, res) => {
   let body = req.body;
   let id = req.params.id;
 
-
+  console.log(body);
   //We want to make a new array to add to the exercises section of the currently existing entry
 
   db.Workout.updateOne(
     { _id: mongojs.ObjectId(id) },
     {
-      $push:
+      $addToSet:
         { exercises: body }
     },
     (error, edited) => {
@@ -76,14 +76,8 @@ app.put("/api/workouts/:id", (req, res) => {
 
 });
 
-//Gets the most recent entry
+//Orders entries in reverse chronological order
 app.get("/api/workouts", (req, res) => {
-  // db.Workout.find({}).sort({ day: -1 }).limit(1, (err, data) => {
-  //   if (err) {
-  //     console.log(err)
-  //   } else { 
-  //     res.json(data); }
-  // })
   db.Workout.find({}).sort({ day: -1 }).populate("workouts")
     .then(dbWorkout => {
       res.json(dbWorkout);
