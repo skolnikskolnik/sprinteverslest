@@ -1,6 +1,8 @@
 async function initWorkout() {
   const lastWorkout = await API.getLastWorkout();
   console.log("Last workout:", lastWorkout);
+
+  
   //Display information on the last workout to the DOM
   let dateText = lastWorkout.day.substring(0,10);
   const displayEl = document.getElementById("lastworkout");

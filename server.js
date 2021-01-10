@@ -52,37 +52,39 @@ app.put("/api/workouts/:id", (req, res) => {
   let body = req.body;
   let id = req.params.id;
 
-  console.log(body);
 
-  db.Workout.update(
+  //We want to make a new array to add to the exercises section of the currently existing entry
+
+  db.Workout.updateOne(
+    { _id: mongojs.ObjectId(id) },
     {
-      _id: mongojs.ObjectId(id)
-    },
-    {
-      $set: {
-        type: body.type,
-        name: body.name,
-        weight: body.weight,
-        sets: body.sets,
-        reps: body.reps,
-        duration: body.duration
-      }
+      $push:
+        { exercises: body }
     },
     (error, edited) => {
       if (error) {
         console.log(error);
+        res.send(error);
       } else {
         console.log(edited);
         res.send(edited);
       }
     }
   )
-})
 
-//Want a fetch for /api/workouts - this should get the last workout to populate it to the html
+
+
+});
+
+//Gets the most recent entry
 app.get("/api/workouts", (req, res) => {
-  //First sort by date, then grab the most recent one
-  db.Workout.find().sort({ day: -1 }).limit(1).populate("workouts")
+  // db.Workout.find({}).sort({ day: -1 }).limit(1, (err, data) => {
+  //   if (err) {
+  //     console.log(err)
+  //   } else { 
+  //     res.json(data); }
+  // })
+  db.Workout.find({}).sort({ day: -1 }).populate("workouts")
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -90,11 +92,8 @@ app.get("/api/workouts", (req, res) => {
       res.json(err);
     })
 
-
 });
 
-
-//What is the difference between "Complete" button and "Add Exercise" button
 
 
 //Generating data when user clicks dashboard

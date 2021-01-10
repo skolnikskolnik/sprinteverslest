@@ -17,6 +17,12 @@ let workoutSeed = [
         weight: 100,
         reps: 10,
         sets: 4
+      },
+      {
+        type: "cardio",
+        name: "Running",
+        duration: 25,
+        distance: 4
       }
     ]
   },
@@ -30,6 +36,12 @@ let workoutSeed = [
         weight: 300,
         reps: 10,
         sets: 4
+      },
+      {
+        type: "cardio",
+        name: "Running",
+        duration: 25,
+        distance: 4
       }
     ]
   },
@@ -43,12 +55,24 @@ let workoutSeed = [
         weight: 185,
         reps: 8,
         sets: 4
+      },
+      {
+        type: "cardio",
+        name: "Running",
+        duration: 25,
+        distance: 4
       }
     ]
   },
   {
     day: new Date().setDate(new Date().getDate()-7),
     exercises: [
+      {
+        type: "cardio",
+        name: "Running",
+        duration: 25,
+        distance: 4
+      },
       {
         type: "cardio",
         name: "Running",
@@ -67,6 +91,12 @@ let workoutSeed = [
         weight: 285,
         reps: 10,
         sets: 4
+      },
+      {
+        type: "cardio",
+        name: "Running",
+        duration: 25,
+        distance: 4
       }
     ]
   },
@@ -80,6 +110,14 @@ let workoutSeed = [
         weight: 300,
         reps: 10,
         sets: 4
+      },
+      {
+        type: "resistance",
+        name: "testtesttest",
+        duration: 45,
+        weight: 45,
+        reps: 1045,
+        sets: 3
       }
     ]
   },
@@ -93,6 +131,12 @@ let workoutSeed = [
         weight: 300,
         reps: 10,
         sets: 4
+      },
+      {
+        type: "cardio",
+        name: "Running",
+        duration: 25,
+        distance: 4
       }
     ]
   },
@@ -106,6 +150,12 @@ let workoutSeed = [
         weight: 300,
         reps: 10,
         sets: 4
+      },
+      {
+        type: "cardio",
+        name: "Running",
+        duration: 25,
+        distance: 4
       }
     ]
   },
@@ -119,6 +169,18 @@ let workoutSeed = [
         weight: 300,
         reps: 10,
         sets: 4
+      },
+      {
+        type: "cardio",
+        name: "Running",
+        duration: 25,
+        distance: 4
+      },
+      {
+        type: "cardio",
+        name: "Running",
+        duration: 25,
+        distance: 4
       }
     ]
   }
