@@ -1,6 +1,28 @@
 async function initWorkout() {
   const lastWorkout = await API.getLastWorkout();
   console.log("Last workout:", lastWorkout);
+  //Display information on the last workout to the DOM
+  let dateText = lastWorkout.day.substring(0,10);
+  const displayEl = document.getElementById("lastworkout");
+  let dateEl = document.createElement("p");
+  let dateTextNode = document.createTextNode(`Date: ${dateText}`);
+  dateEl.appendChild(dateTextNode);
+  displayEl.appendChild(dateEl);
+
+  //Displays type of workout
+  let typeEl = document.createElement("p");
+  let typeTextNode = document.createTextNode(`Type: ${lastWorkout.type}`);
+  typeEl.appendChild(typeTextNode);
+  displayEl.appendChild(typeEl);
+
+  //Display name of workout
+  let nameEl = document.createElement("p");
+  let nameTextNode = document.createTextNode(`Name: ${lastWorkout.name}`);
+  nameEl.appendChild(nameTextNode);
+  displayEl.appendChild(nameEl);
+
+  
+
   if (lastWorkout) {
     document
       .querySelector("a[href='/exercise?']")
