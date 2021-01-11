@@ -1,4 +1,5 @@
 const API = {
+  //Rather then getting the last workout, get all workouts from the most recent data
   async getLastWorkout() {
     let res;
     try {

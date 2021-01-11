@@ -7,6 +7,7 @@ const path = require("path");
 const PORT = process.env.PORT || 3000;
 
 const db = require("./models");
+const Workout = require("./models/workoutModel.js")
 const app = express();
 
 app.use(logger("dev"));
@@ -53,7 +54,6 @@ app.put("/api/workouts/:id", (req, res) => {
   let id = req.params.id;
 
   console.log(body);
-  //We want to make a new array to add to the exercises section of the currently existing entry
 
   db.Workout.updateOne(
     { _id: mongojs.ObjectId(id) },
@@ -72,33 +72,53 @@ app.put("/api/workouts/:id", (req, res) => {
     }
   )
 
-
-
 });
 
 //Orders entries in reverse chronological order
 app.get("/api/workouts", (req, res) => {
-  db.Workout.find({}).sort({ day: -1 }).populate("workouts")
-    .then(dbWorkout => {
-      res.json(dbWorkout);
-    })
-    .catch(err => {
-      res.json(err);
-    })
+
+  db.Workout.aggregate([
+    {
+      $group: {
+        time: { $sum: "$duration" }
+      }
+    }
+  ]).then(
+    db.Workout.find({}).sort({ day: 1 }).populate("workouts")
+      .then(dbWorkout => {
+        res.json(dbWorkout);
+      })
+      .catch(err => {
+        res.json(err);
+      })
+  );
 
 });
 
 
-
-//Generating data when user clicks dashboard
+//Should get the last seven workouts
 app.get("/api/workouts/range", (req, res) => {
-  db.Workout.find({})
-    .then(dbWorkout => {
-      res.json(dbWorkout);
-    })
-    .catch(err => {
-      res.json(err);
-    })
+  //Still need to calculate duration
+  db.Workout.aggregate([
+    {
+      $group: {
+        time: { $sum: "$duration" }
+      }
+    }
+  ]).then(
+    db.Workout.find({}).sort({ day: -1 }).limit(7)
+      .then(dbWorkout => {
+        
+        let body = dbWorkout.exercises;
+        for(let i=0; i<body.length; i++){
+          console.log(body[i]);
+        }
+        res.json(dbWorkout);
+      })
+      .catch(err => {
+        res.json(err);
+      })
+  )
 })
 
 app.listen(PORT, () => {

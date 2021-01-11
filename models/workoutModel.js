@@ -8,8 +8,12 @@ const WorkoutSchema = new Schema({
     },
     exercises: {
         type: Array
+    },
+    time: {
+        type: Number
     }
 });
+
 
 
 

@@ -2,16 +2,15 @@ async function initWorkout() {
   const lastWorkout = await API.getLastWorkout();
   console.log("Last workout:", lastWorkout);
 
-  
-  //Display information on the last workout to the DOM
-  let dateText = lastWorkout.day.substring(0,10);
-  const displayEl = document.getElementById("lastworkout");
-  let dateEl = document.createElement("p");
-  let dateTextNode = document.createTextNode(`Date: ${dateText}`);
-  dateEl.appendChild(dateTextNode);
-  displayEl.appendChild(dateEl);
+  let durationReal=0;
+  for (let i = 0; i < lastWorkout.exercises.length; i++) {
+    let duration = lastWorkout.exercises[i].duration;
+    console.log(duration);
+    durationReal += duration;
+  }
+  console.log(durationReal);
 
-  
+
 
   if (lastWorkout) {
     document
@@ -20,7 +19,7 @@ async function initWorkout() {
 
     const workoutSummary = {
       date: formatDate(lastWorkout.day),
-      totalDuration: lastWorkout.totalDuration,
+      totalDuration: durationReal,
       numExercises: lastWorkout.exercises.length,
       ...tallyExercises(lastWorkout.exercises)
     };
