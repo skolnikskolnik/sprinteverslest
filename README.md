@@ -14,6 +14,17 @@
 ## Description: 
 This is a fitness tracker app that allows users to enter multiple exercises for each workout, as well as keep track of total pounds lifted, total miles travelled, and duration of workouts. Users can also view data for the past 7 workouts.
 
+This application is deployed in <a href='https://fathomless-ridge-85219.herokuapp.com/'>heroku.</a> 
+
+The user is greeted with the following screen:
+![welcome screen](./images/homepage.JPG)
+
+Users can enter exercises:
+![add exercise](./images/addexercise.JPG)
+
+User can view dashboard:
+![view dashboard](./images/dashboard.JPG)
+
 ## Installation instructions: 
 Users should run npm install upon downloading the application such that all packages will be installed, then they should seed the seed file.
 
