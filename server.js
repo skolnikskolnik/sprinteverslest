@@ -45,13 +45,16 @@ app.post("/api/workouts", (req, res) => {
 });
 
 //A put route that adds an exercise to the session started by the post route
+//THIS IS WHERE THE MISTAKE IS 
 app.put("/api/workouts/:id", (req, res) => {
-  let body = req.body;
-  console.log(body);
+  console.log(req.params.id);
+  console.log(req.body);
 
-  db.Workout.findByIdAndUpdate(req.params.id, { $push: { exercises: body } }, { new: true, runValidators: true })
+  db.Workout.findByIdAndUpdate(mongojs.ObjectId(req.params.id),
+    { $push: { exercises: req.body } }, { new: true, runValidators: true })
     .then(dbWorkout => {
       res.json(dbWorkout);
+      console.log(dbWorkout);
     }).catch(err => {
       res.json(err);
     });
