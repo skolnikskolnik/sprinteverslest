@@ -17,13 +17,13 @@ This is a fitness tracker app that allows users to enter multiple exercises for 
 This application is deployed in <a href='https://fathomless-ridge-85219.herokuapp.com/'>heroku.</a> 
 
 The user is greeted with the following screen:
-![welcome screen](./images/homepage.JPG)
+![welcome screen](./pictures/homepage.JPG)
 
 Users can enter exercises:
-![add exercise](./images/addexercise.JPG)
+![add exercise](./pictures/addexercise.JPG)
 
 User can view dashboard:
-![view dashboard](./images/dashboard.JPG)
+![view dashboard](./pictures/dashboard.JPG)
 
 ## Installation instructions: 
 Users should run npm install upon downloading the application such that all packages will be installed, then they should seed the seed file.
