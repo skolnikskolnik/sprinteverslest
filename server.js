@@ -47,8 +47,6 @@ app.post("/api/workouts", (req, res) => {
 //A put route that adds an exercise to the session started by the post route
 //THIS IS WHERE THE MISTAKE IS 
 app.put("/api/workouts/:id", (req, res) => {
-  console.log(req.params.id);
-  console.log(req.body);
 
   db.Workout.findByIdAndUpdate(mongojs.ObjectId(req.params.id),
     { $push: { exercises: req.body } }, { new: true, runValidators: true })
@@ -80,15 +78,17 @@ app.get("/api/workouts", (req, res) => {
 
 //Should get the last seven workouts
 app.get("/api/workouts/range", (req, res) => {
-  //Still need to calculate duration
+ 
+  //Duration is popping up for the main page but isn't populating here for some reason
   db.Workout.aggregate([
     {
       $addFields: {
-        totalDuration: "$exercises.duration"
+        totalDuration: {$sum: "$exercises.duration"}
       }
     }
-  ]).sort({ _id: -1 }).limit(7)
+  ]).sort({ day: -1 }).limit(7)
     .then(dbWorkout => {
+      console.log(dbWorkout);
       res.json(dbWorkout);
     })
     .catch(err => {
